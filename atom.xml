@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://alexanderonly.github.io</id>
     <title>浮生一阙</title>
-    <updated>2020-03-17T03:56:01.357Z</updated>
+    <updated>2020-03-17T07:47:25.354Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://alexanderonly.github.io"/>
     <link rel="self" href="https://alexanderonly.github.io/atom.xml"/>
@@ -16,12 +16,20 @@
         <link href="https://alexanderonly.github.io/post/di-ba-zhang-dian-zi-de-zi-xuan/">
         </link>
         <updated>2020-03-17T03:39:36.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="81-电子自旋态与自旋算符">8.1 电子自旋态与自旋算符</h2>
+<h3 id="电子自旋的实验依据">电子自旋的实验依据</h3>
+<ul>
+<li>碱金属原子光谱的双线结构、反常塞曼（Zeeman）效应、施特恩（Stern）- 格拉赫（Gerlach）实验等。（参照原⼦物理部分）</li>
+<li>电子自旋在空间中任意方向上的投影只取<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>±</mo><mi mathvariant="normal">ℏ</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\pm \hbar/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">±</span><span class="mord">ℏ</span><span class="mord">/</span><span class="mord">2</span></span></span></span>两个值，且<strong>电子是费米子</strong>。</li>
+</ul>
+]]></summary>
         <content type="html"><![CDATA[<h2 id="81-电子自旋态与自旋算符">8.1 电子自旋态与自旋算符</h2>
 <h3 id="电子自旋的实验依据">电子自旋的实验依据</h3>
 <ul>
 <li>碱金属原子光谱的双线结构、反常塞曼（Zeeman）效应、施特恩（Stern）- 格拉赫（Gerlach）实验等。（参照原⼦物理部分）</li>
 <li>电子自旋在空间中任意方向上的投影只取<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>±</mo><mi mathvariant="normal">ℏ</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\pm \hbar/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">±</span><span class="mord">ℏ</span><span class="mord">/</span><span class="mord">2</span></span></span></span>两个值，且<strong>电子是费米子</strong>。</li>
 </ul>
+<!-- more -->
 <h3 id="自旋态的描述">自旋态的描述</h3>
 <ul>
 <li>考虑到自旋，电子的波函数应为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ψ</mi><mo>(</mo><mi>r</mi><mo separator="true">,</mo><msub><mi>S</mi><mi>z</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">\psi(r,S_z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。由于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>z</mi></msub><mo>=</mo><mo>±</mo><mi mathvariant="normal">ℏ</mi><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S_z=\pm \hbar/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">±</span><span class="mord">ℏ</span><span class="mord">/</span><span class="mord">2</span></span></span></span>（自旋角动量在z轴上的投影），经常使用二分量波函数来描述电子的状态。</li>
