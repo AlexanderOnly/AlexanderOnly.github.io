@@ -7,7 +7,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Hello Gridea | 浮生一阙</title>
+<title>日经吐槽贴（2） | 浮生一阙</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1584415737700">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -27,8 +27,8 @@
 
 
 
-    <meta name="description" content="Hello Gridea" />
-    <meta name="keywords" content="Gridea" />
+    <meta name="description" content="日经吐槽贴（2）" />
+    <meta name="keywords" content="琐记" />
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -134,199 +134,6 @@
 
 <div class="sidebar">
   
-    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
-      
-      <div class="sidebar-body pisces" id="sidebar_body">
-        
-          
-            <div style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
-let active = 'active-show', activeClass = 'active-current';
-let tocWrapper = document.querySelector('#toc_wrapper');
-let tocContent = tocWrapper.children[0];
-let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
-
-function addTocNumber(elem, deep) {
-  if (!elem) {
-    return;
-  }
-  let prop = elem.__proto__;
-
-  if (prop === HTMLUListElement.prototype) {
-    for (let i = 0; i < elem.children.length; i++) {
-      addTocNumber(elem.children[i], deep + (i + 1) + '.');
-    }
-  } else if (prop === HTMLLIElement.prototype) {
-    // 保存li元素
-    if (elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-      lList.push(elem);
-    }
-    for (let i = 0; i < elem.children.length; i++) {
-      let cur = elem.children[i];
-      if (cur.__proto__ === HTMLAnchorElement.prototype) {
-        if (autoNumber) {
-          cur.text =  deep + ' ' + cur.text;
-        }
-      } else if (cur.__proto__ === HTMLUListElement.prototype) {
-        addTocNumber(cur, deep);
-      }
-    }
-  }
-}
-
-function removeParentActiveClass() {
-  let parents = tocContent.querySelectorAll('.'+active)
-  parents.forEach(function(elem) {
-    elem.classList.remove(active);
-  });
-}
-
-function addActiveClass(index) {
-  if (index >= 0 && index < hList.length) {
-    lList[index].classList.add(activeClass);
-  }
-}
-
-function removeActiveClass(index) {
-  if (index >= 0 && index < hList.length) {
-    lList[index].classList.remove(activeClass);
-  }
-}
-
-function addActiveLiElemment(elem, parent) {
-  if (!elem || elem === parent) {
-    return;
-  } else {
-    if (elem.__proto__ === HTMLLIElement.prototype) {
-      elem.classList.add(active);
-    }
-    addActiveLiElemment(elem.parentElement, parent);
-  }
-}
-
-function showToc() {
-  if (tocWrapper) {
-    postBody = document.querySelector('#post_body');
-    for (let i = 0; i < postBody.children.length; i++) {
-      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-        hList.push(postBody.children[i]);
-      }
-    }
-    if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-    } else if (tocWrapper.classList.contains('no_compress')){
-      tocContent.classList.add('expanded');
-    } else {
-      if (hList.length > 10) {
-        active = 'active-hidden'
-        tocContent.classList.add('closed');
-      } else {
-        tocContent.classList.add('expanded');
-      }
-    }
-  }
-}
-
-(function() {
-  // 处理不是从#一级标题开始目录
-  if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-    let con = tocContent.children[0].children[0];
-    tocContent.innerHTML = con.innerHTML;
-  }
-  addTocNumber(tocContent, '');
-})();
-
-document.addEventListener('scroll', function(e) {
-  if (lList.length <= 0) {
-    return;
-  }
-  let scrollTop = document.scrollingElement.scrollTop + 10;
-  let dir;
-
-  if (lastTop - scrollTop > 0) {
-    dir = 'up';
-  } else {
-    dir = 'down';
-  }
-
-  lastTop = scrollTop;
-  if (scrollTop <= 0) {
-    if (lastIndex >= 0 && lastIndex < hList.length) {
-      lList[lastIndex].classList.remove(activeClass);
-    }
-    return;
-  }
-
-  let current = 0, hasFind = false;
-  for (let i = 0; i < hList.length; i++) {
-    if (hList[i].offsetTop > scrollTop) {
-      current = i;
-      hasFind = true;
-      break;
-    }
-  }
-  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-    current = hList.length - 1;
-  } else {
-    current--;
-  }
-  if (dir === 'down') {
-    if (current > lastIndex) {
-      addActiveClass(current);
-      removeActiveClass(lastIndex) 
-      lastIndex = current;
-      removeParentActiveClass();
-      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
-    }
-  } else {
-    if (current < lastIndex) {
-      addActiveClass(current);
-      removeActiveClass(lastIndex);
-      lastIndex = current;
-      removeParentActiveClass();
-      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
-    }
-  }
-});
-
-window.addEventListener('load', function() {
-  showToc();
-  document.querySelector('#sidebar').style='display: block;';
-  tocWrapper.classList.add('toc-active');
-  setTimeout(function() {
-    if ("createEvent" in document) {
-      let evt = document.createEvent("HTMLEvents");
-      evt.initEvent("scroll", false, true);
-      document.dispatchEvent(evt);
-    }
-    else {
-      document.fireEvent("scroll");
-    }
-  }, 500)
-})
-
-</script>
-            </div>
-          
-        
-      </div>
-    </div>
-  
 </div>
 <script>
   const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
@@ -409,8 +216,8 @@ window.addEventListener('load', function() {
             <div class="section bg-color post post-page">
               <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://alexanderonly.github.io/post/hello-gridea/">
-      Hello Gridea
+    <a class="post-title-link" href="https://alexanderonly.github.io/post/ri-jing-tu-cao-tie-2/">
+      日经吐槽贴（2）
     </a>
   </h1>
   <div class="post-meta">
@@ -418,7 +225,7 @@ window.addEventListener('load', function() {
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2018-12-12</span>
+      <span>2019-11-26</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -427,8 +234,8 @@ window.addEventListener('load', function() {
         <span class="pc-show">分类于</span>
         
           
-            <a href="https://alexanderonly.github.io/tag/KJbyVzIaQ/">
-              <span>Gridea</span>
+            <a href="https://alexanderonly.github.io/tag/aluMgwnbo/">
+              <span>琐记</span>
             </a>
           
         
@@ -437,38 +244,43 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
+      <span>3分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>298<span class="pc-show">字数</span></span>
+      <span>732<span class="pc-show">字数</span></span>
     </span>
     
   </div>
 </header>
               <div class="post-body next-md-body" id="post_body">
-                <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                <p>2019-11-26</p>
+<p>可能是之前熬了太多夜，也可能是感冒没好，这几天总是一睡不醒...</p>
+<p>工作方面，最近折腾了一下机器学习做势函数的 DeepMD，虽然还是没能优化到最好，但也算勉强能用了（又不是不能用.jpg）。这两天难得比较清闲，上一个任务告一段落，上周帮导师写的本子也还在申，总算有时间补一下专业课的笔记。另外闲下来之后又开始反省自己不运动了...厦门这种昼夜温差，顶着冷风出门可太难了</p>
+<p>今天发现以前追的蛮多 b 站番剧，连蜡笔小新都需要大会员了，还在犹豫是不是要剁手...</p>
+<p>分享一首古风。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=438904115&auto=0&height=66"></iframe>
+<p>2019-10-30 | 生日特辑</p>
+<p>人间值得。</p>
+<p>常怀希望。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1305366565&auto=0&height=66"></iframe>
+<p>2019-10-12</p>
+<p>想用 QE 算个东西，发现服务器上大老板账号一万个人在排队，自己前天提交的任务还没排到...又发现小老板账号下一个任务都没有，就想能不能在这个账号下装个 QE 自己悄悄算XD 安装过程很容易，对着安装包 './configure','make all' 就好了，可是用 pw.x 时却报了最恶心的 ‘SIGSEGV, segmentation fault occurred’错误。折腾了半天，最后在一个小角落找到了解决方案：<br>
+我用的是 ifort14，只要把 QE 目录下 PW/src/input.f90 的 1690 行改为</p>
+<blockquote>
+<p>#if ! defined (__INTEL_COMPILER) || (__INTEL_COMPILER &gt;= 1500)</p>
+</blockquote>
+<p>再重新编译一次即可。这个 bug 还挺难找的，在这里记录下来以备待查。</p>
+<p>最后分享一首古风。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=34014151&auto=0&height=66"></iframe>
+2019-09-25
+<p>生活逐渐步入正轨，想想自己已经鸽了很久了。</p>
+<p>给办公室电脑重装了系统，最后选择了 Ubuntu，随时唤出终端的体验简直不要太好。比较烦恼的梯子问题昨天也通过 Shadowsocks-Qt5 和 SwitchyOmega 解决了。此外，最近在 GayHub 发现一个 Bitcron 的同步工具 bitcron-cli，用起来也相当不错。</p>
+<p>开学两周，要说体验最深的事情还是 peer pressure 了，周边师兄师姐仿佛过的是 007 的生活，导致自己每次早归都带上了负罪感。报应来的很快，手上课题纷纷陷入瓶颈：高压 FeO 无论如何无法复现别人的实验结果；分子间作用势又因为相关论文太多不知从何看起；AGA 程序源代码看到自己头大... 开始切实考虑要不要去隔壁南普陀烧个香</p>
+<p>办公室显示器有迷之问题，深色背景明显能看到波纹...打算等这个月发了钱给办公室换个新显示器，顺便再给电脑加一个 SSD，启动一个浏览器要一分钟我裂开了...</p>
+<p>最后分享一首洗脑歌：一想到你我就～坤坤变篮球～</p>
+<p><audio src="http://mp3.dwjgrw.cn/down/28693.mp3" controls></audio></p>
 
               </div>
               <div class="post-footer">
@@ -479,7 +291,7 @@ window.addEventListener('load', function() {
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://alexanderonly.github.io/post/hello-gridea/" title="Hello Gridea">Hello Gridea</a>
+      <a href="https://alexanderonly.github.io/post/ri-jing-tu-cao-tie-2/" title="日经吐槽贴（2）">日经吐槽贴（2）</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -488,18 +300,18 @@ window.addEventListener('load', function() {
   </ul>
   <div class="tags">
     
-      <a href="https://alexanderonly.github.io/tag/KJbyVzIaQ/"># Gridea</a>
+      <a href="https://alexanderonly.github.io/tag/aluMgwnbo/"># 琐记</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="日经吐槽贴（2）" href="https://alexanderonly.github.io/post/ri-jing-tu-cao-tie-2/">日经吐槽贴（2）</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="日经吐槽贴（2）" href="https://alexanderonly.github.io/post/ri-jing-tu-cao-tie-2/">上一篇</a>
-      
     </div>
     <div class="nav-next">
+      
+        <a class="nav-pc-next" title="Hello Gridea" href="https://alexanderonly.github.io/post/hello-gridea/">Hello Gridea</a>
+        <a class="nav-mobile-next" title="Hello Gridea" href="https://alexanderonly.github.io/post/hello-gridea/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>

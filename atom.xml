@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://alexanderonly.github.io</id>
     <title>浮生一阙</title>
-    <updated>2020-03-17T03:07:50.848Z</updated>
+    <updated>2020-03-17T03:29:06.548Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://alexanderonly.github.io"/>
     <link rel="self" href="https://alexanderonly.github.io/atom.xml"/>
@@ -10,6 +10,40 @@
     <logo>https://alexanderonly.github.io/images/avatar.png</logo>
     <icon>https://alexanderonly.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 浮生一阙</rights>
+    <entry>
+        <title type="html"><![CDATA[日经吐槽贴（2）]]></title>
+        <id>https://alexanderonly.github.io/post/ri-jing-tu-cao-tie-2/</id>
+        <link href="https://alexanderonly.github.io/post/ri-jing-tu-cao-tie-2/">
+        </link>
+        <updated>2019-11-26T03:26:51.000Z</updated>
+        <content type="html"><![CDATA[<p>2019-11-26</p>
+<p>可能是之前熬了太多夜，也可能是感冒没好，这几天总是一睡不醒...</p>
+<p>工作方面，最近折腾了一下机器学习做势函数的 DeepMD，虽然还是没能优化到最好，但也算勉强能用了（又不是不能用.jpg）。这两天难得比较清闲，上一个任务告一段落，上周帮导师写的本子也还在申，总算有时间补一下专业课的笔记。另外闲下来之后又开始反省自己不运动了...厦门这种昼夜温差，顶着冷风出门可太难了</p>
+<p>今天发现以前追的蛮多 b 站番剧，连蜡笔小新都需要大会员了，还在犹豫是不是要剁手...</p>
+<p>分享一首古风。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=438904115&auto=0&height=66"></iframe>
+<p>2019-10-30 | 生日特辑</p>
+<p>人间值得。</p>
+<p>常怀希望。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1305366565&auto=0&height=66"></iframe>
+<p>2019-10-12</p>
+<p>想用 QE 算个东西，发现服务器上大老板账号一万个人在排队，自己前天提交的任务还没排到...又发现小老板账号下一个任务都没有，就想能不能在这个账号下装个 QE 自己悄悄算XD 安装过程很容易，对着安装包 './configure','make all' 就好了，可是用 pw.x 时却报了最恶心的 ‘SIGSEGV, segmentation fault occurred’错误。折腾了半天，最后在一个小角落找到了解决方案：<br>
+我用的是 ifort14，只要把 QE 目录下 PW/src/input.f90 的 1690 行改为</p>
+<blockquote>
+<p>#if ! defined (__INTEL_COMPILER) || (__INTEL_COMPILER &gt;= 1500)</p>
+</blockquote>
+<p>再重新编译一次即可。这个 bug 还挺难找的，在这里记录下来以备待查。</p>
+<p>最后分享一首古风。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=34014151&auto=0&height=66"></iframe>
+2019-09-25
+<p>生活逐渐步入正轨，想想自己已经鸽了很久了。</p>
+<p>给办公室电脑重装了系统，最后选择了 Ubuntu，随时唤出终端的体验简直不要太好。比较烦恼的梯子问题昨天也通过 Shadowsocks-Qt5 和 SwitchyOmega 解决了。此外，最近在 GayHub 发现一个 Bitcron 的同步工具 bitcron-cli，用起来也相当不错。</p>
+<p>开学两周，要说体验最深的事情还是 peer pressure 了，周边师兄师姐仿佛过的是 007 的生活，导致自己每次早归都带上了负罪感。报应来的很快，手上课题纷纷陷入瓶颈：高压 FeO 无论如何无法复现别人的实验结果；分子间作用势又因为相关论文太多不知从何看起；AGA 程序源代码看到自己头大... 开始切实考虑要不要去隔壁南普陀烧个香</p>
+<p>办公室显示器有迷之问题，深色背景明显能看到波纹...打算等这个月发了钱给办公室换个新显示器，顺便再给电脑加一个 SSD，启动一个浏览器要一分钟我裂开了...</p>
+<p>最后分享一首洗脑歌：一想到你我就～坤坤变篮球～</p>
+<p><audio src="http://mp3.dwjgrw.cn/down/28693.mp3" controls></audio></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://alexanderonly.github.io/post/hello-gridea/</id>
