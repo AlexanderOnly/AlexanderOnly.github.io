@@ -3,10 +3,10 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>关于 | 浮生一阙</title>
-<link rel="shortcut icon" href="https://alexanderonly.github.io//favicon.ico?v=1584411245237">
+<link rel="shortcut icon" href="https://alexanderonly.github.io/favicon.ico?v=1584411861545">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://alexanderonly.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | 浮生一阙 - Atom Feed" href="https://alexanderonly.github.io//atom.xml">
+<link rel="stylesheet" href="https://alexanderonly.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="关于 | 浮生一阙 - Atom Feed" href="https://alexanderonly.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
@@ -27,8 +27,8 @@
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://alexanderonly.github.io/">
-  <img class="avatar" src="https://alexanderonly.github.io//images/avatar.png?v=1584411245237" alt="">
+  <a href="https://alexanderonly.github.io">
+  <img class="avatar" src="https://alexanderonly.github.io/images/avatar.png?v=1584411861545" alt="">
   </a>
   <h1 class="site-title">
     浮生一阙
@@ -124,10 +124,36 @@
         
 
         
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7be0d42783903a5fd44a',
+    clientSecret: '2f2f373b44bc8e64c40984cecd59907c168272d4',
+    repo: 'alexanderonly.github.io',
+    owner: 'alexanderonly',
+    admin: ['alexanderonly'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://alexanderonly.github.io//atom.xml" target="_blank">
+  <a class="rss" href="https://alexanderonly.github.io/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>

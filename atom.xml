@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://alexanderonly.github.io/</id>
+    <id>https://alexanderonly.github.io</id>
     <title>浮生一阙</title>
-    <updated>2020-03-17T02:14:07.220Z</updated>
+    <updated>2020-03-17T02:24:24.163Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://alexanderonly.github.io/"/>
+    <link rel="alternate" href="https://alexanderonly.github.io"/>
     <link rel="self" href="https://alexanderonly.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://alexanderonly.github.io/images/avatar.png</logo>
