@@ -8,7 +8,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>LSF 作业管理系统 | 浮生一阙</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1585103996659">
+<link rel="shortcut icon" href="/favicon.ico?v=1585104083371">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
 
@@ -545,19 +545,16 @@ bhosts  #各节点状态
 bhosts -l  &lt;主机名&gt;  #展示指定主机的信息
 lsload  #各节点的负载信息
 </code></pre>
-<p><code>bhost</code>的STATUS栏展示节点状态：</p>
-</li>
-</ul>
-<p>ok  可用——可接受新的作业的正常状态<br>
+<p><code>bhost</code>的STATUS栏展示节点状态：<br>
+ok  可用——可接受新的作业的正常状态<br>
 unavail  不可用<br>
 可能原因：主机关闭；LIM和sbatchd不可达。<br>
 unreach  无法连接<br>
 可能原因：LIM在运行，但是sbatchd不可达。<br>
 close  关闭——不接受新的作业<br>
-可能原因：该节点的最大作业数被设置为0；该节点被临时关闭；该节点正在运行的作业数量以达到上限。</p>
-<pre><code>使用`bhosts -l 主机名`可查看具体原因。
-</code></pre>
-<ul>
+可能原因：该节点的最大作业数被设置为0；该节点被临时关闭；该节点正在运行的作业数量以达到上限。<br>
+使用<code>bhosts -l 主机名</code>可查看具体原因。</p>
+</li>
 <li>
 <p>开关节点</p>
 <pre><code class="language-shell">badmin hopen  &lt;主机名&gt;
