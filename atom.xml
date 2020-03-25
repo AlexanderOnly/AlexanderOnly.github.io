@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://alexanderonly.github.io</id>
     <title>浮生一阙</title>
-    <updated>2020-03-25T02:29:52.573Z</updated>
+    <updated>2020-03-25T02:34:28.760Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://alexanderonly.github.io"/>
     <link rel="self" href="https://alexanderonly.github.io/atom.xml"/>
@@ -16,113 +16,107 @@
         <link href="https://alexanderonly.github.io/post/lsf-zuo-ye-guan-li-xi-tong/">
         </link>
         <updated>2020-03-25T02:11:50.000Z</updated>
-        <summary type="html"><![CDATA[<p>&gt; 最近遇到 HPC 的任务提交问题，最后发现是用户节点任务数达到上限了。顺便记录一下 LSF 系统的常用命令以备待查。</p>
-<p># <strong>简介</strong></p>
+        <content type="html"><![CDATA[<h1 id="简介">简介</h1>
 <p>LSF和openlava</p>
-<p>&gt; IBM Spectrum LSF是一款分布式集群管理系统软件，负责计算资源的管理和批处理作业的调度。</p>
-<p>&gt; openlava兼容IBM Spectrum LSF的工作负载调度器，支持各种高性能计算和分析应用。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>&gt; 最近遇到 HPC 的任务提交问题，最后发现是用户节点任务数达到上限了。顺便记录一下 LSF 系统的常用命令以备待查。</p>
-<p># <strong>简介</strong></p>
-<p>LSF和openlava</p>
-<p>&gt; IBM Spectrum LSF是一款分布式集群管理系统软件，负责计算资源的管理和批处理作业的调度。</p>
-<p>&gt; openlava兼容IBM Spectrum LSF的工作负载调度器，支持各种高性能计算和分析应用。</p>
-<!-- more -->
-<p># <strong>程序管理</strong></p>
+<blockquote>
+<p>IBM Spectrum LSF是一款分布式集群管理系统软件，负责计算资源的管理和批处理作业的调度。</p>
+</blockquote>
+<blockquote>
+<p>openlava兼容IBM Spectrum LSF的工作负载调度器，支持各种高性能计算和分析应用。</p>
+</blockquote>
+<h1 id="程序管理">程序管理</h1>
 <p>以下命令可能需要root（或sudo）用户才能执行。</p>
-<p>```shell</p>
-<p>lsid  #查看集群说明信息</p>
-<p>#启动/停止程序</p>
-<p>openlava start  #启动</p>
-<p>openlava stop  #停止</p>
-<p>openlava status  #状态</p>
-<p>```</p>
-<p># <strong>获取信息</strong></p>
+<pre><code class="language-shell">lsid  #查看集群说明信息
+#启动/停止程序
+openlava start  #启动
+openlava stop  #停止
+openlava status  #状态
+</code></pre>
+<h1 id="获取信息">获取信息</h1>
 <ul>
-<li>
-<p>host：主机（集群中的一个节点，一般是指一台单独的设备</p>
-</li>
-<li>
-<p>queue：队列（同一类型的作业的集合，默认按作业提交的先后顺序排序执行，类似显示中的排队）</p>
-</li>
+<li>host：主机（集群中的一个节点，一般是指一台单独的设备）</li>
+<li>queue：队列（同一类型的作业的集合，默认按作业提交的先后顺序排序执行，类似显示中的排队）</li>
 </ul>
-<p>## <strong>节点状态bhos</strong></p>
+<h2 id="节点状态bhosts">节点状态bhosts</h2>
 <ul>
 <li>
 <p>节点信息</p>
-<p>```shell</p>
-<p>lshosts  #各节点的系统信息（cpu内存等）</p>
-<p>bhosts  #各节点状态</p>
-<p>bhosts -l  &lt;主机名&gt;  #展示指定主机的信息</p>
-<p>lsload  #各节点的负载信息</p>
-<p>```</p>
-<p><code>bhost</code>的STATUS</p>
-</li>
+<pre><code class="language-shell">lshosts  #各节点的系统信息（cpu内存等）
+
+bhosts  #各节点状态
+bhosts -l  &lt;主机名&gt;  #展示指定主机的信息
+
+lsload  #各节点的负载信息
+</code></pre>
+<p><code>bhost</code>的STATUS栏展示节点状态：</p>
+<ul>
 <li>
-<p>ok  可用——可接受新的作</p>
+<p>ok  可用——可接受新的作业的正常状态</p>
 </li>
 <li>
 <p>unavail  不可用</p>
+<p>可能原因：主机关闭；LIM和sbatchd不可达。</p>
+</li>
+<li>
+<p>unreach  无法连接</p>
+<p>可能原因：LIM在运行，但是sbatchd不可达。</p>
+</li>
+<li>
+<p>close  关闭——不接受新的作业</p>
+<p>可能原因：该节点的最大作业数被设置为0；该节点被临时关闭；该节点正在运行的作业数量以达到上限。</p>
+<p>使用<code>bhosts -l 主机名</code>可查看具体原因。</p>
 </li>
 </ul>
-<p>​    可能原因：主机关闭；LIM和sbatch</p>
-<ul>
-<li>unreach  无法连接</li>
-</ul>
-<p>​    可能原因：LIM在运行，但是sbatch</p>
-<p>​    - close  关闭——不接受新的作业</p>
-<p>​    可能原因：该节点的最大作业数被设置为0；该节点被临时关闭；该节点正在运行的作业数量以达到上限。</p>
-<p>​    使用<code>bhosts -l 主机名</code>可查看具体原因。</p>
-<ul>
+</li>
 <li>
 <p>开关节点</p>
-<p>```shell</p>
-<p>badmin hopen  &lt;主机名&gt;</p>
-<p>badmin hclose &lt;主机名&gt;</p>
-<p>```</p>
+<pre><code class="language-shell">badmin hopen  &lt;主机名&gt;
+badmin hclose &lt;主机名&gt;
+</code></pre>
 </li>
 </ul>
-<p>## <strong>队列信息</strong></p>
+<h2 id="队列信息">队列信息</h2>
 <ul>
 <li>
 <p>队列信息queues</p>
-<p>```shell</p>
-<p>bqueues  #查看所有队列</p>
-<p>bqueues &lt;队列名&gt;  #查看某个具体队列的信息</p>
-<p>```</p>
+<pre><code class="language-shell">bqueues  #查看所有队列
+bqueues &lt;队列名&gt;  #查看某个具体队列的信息
+</code></pre>
 </li>
 <li>
 <p>开启或关闭队列</p>
-<p>```shell</p>
-<p>badmin qopen &lt;队列名&gt;</p>
-<p>badmin qclose &lt;队列名&gt;</p>
-<p>```</p>
+<pre><code class="language-shell">badmin qopen &lt;队列名&gt;
+badmin qclose &lt;队列名&gt;
+</code></pre>
 </li>
 </ul>
-<p>## <strong>用户/用户组信息busers</strong></p>
+<h2 id="用户用户组信息busers">用户/用户组信息busers</h2>
 <p>展示用户和用户组相关信息，主要包括最大可用资源、当前运行作业数量、等待作业数量等。</p>
-<p>```shell</p>
-<p>busers all  #所有用户</p>
-<p>busers <username>  #某个用户</p>
-<p>buser  #当前用户</p>
-<p>```</p>
-<p># <strong>作业操作</strong></p>
+<pre><code class="language-shell">busers all  #所有用户
+busers &lt;username&gt;  #某个用户
+buser  #当前用户
+</code></pre>
+<h1 id="作业操作">作业操作</h1>
 <p>JOB: 作业</p>
-<p>## <strong>提交作业bsub</strong></p>
-<p><strong><strong>注意：root用户不能提交作业！</strong></strong></p>
+<h2 id="提交作业bsub">提交作业bsub</h2>
+<p><strong>注意：root用户不能提交作业！</strong></p>
 <p>提交作业后，调度系统会为该作业分配一个编号，后续查询、管理作业均可使用该作业编号进行指定操作。</p>
 <p><code>0</code>号作业表示所有作业。</p>
 <p>可使用大括号扩展特性（例如<code>{102..108}</code>）操作一个编号区间的作业。</p>
-<p>```shell</p>
-<p>bsub [参数] &lt;命令&gt;  #&lt;命令&gt;指要运行的命令/脚本/程序。</p>
-<p>#最常用的参数组合如下</p>
-<p>bsub -q &lt;队列名&gt; -m &lt;机器名&gt; -n &lt;线程数&gt; -o &lt;标准输出文件&gt; -e &lt;标准错误输出文件&gt; -J &lt;作业名&gt; &lt;命令&gt;</p>
-<p>#提交示例</p>
-<p>bsub sleep 100 #随机选择节点单线程执行</p>
-<p>bsub -e %J.err -o %J.out -J myjob -n 16 mpiexec vasp  #16线程并行（mpiexec）执行vasp</p>
-<p>bsub -m c01 -n 5 test.sh  #指定在c01执行test.sh</p>
-<p>bsub -Ip vim testfile.txt  #分配一个节点用以打开vim</p>
-<p>```</p>
+<pre><code class="language-shell">bsub [参数] &lt;命令&gt;  #&lt;命令&gt;指要运行的命令/脚本/程序。
+
+#最常用的参数组合如下
+bsub -q &lt;队列名&gt; -m &lt;机器名&gt; -n &lt;线程数&gt; -o &lt;标准输出文件&gt; -e &lt;标准错误输出文件&gt; -J &lt;作业名&gt; &lt;命令&gt;
+
+#提交示例
+bsub sleep 100 #随机选择节点单线程执行
+
+bsub -e %J.err -o %J.out -J myjob -n 16 mpiexec vasp  #16线程并行（mpiexec）执行vasp
+
+bsub -m c01 -n 5 test.sh  #指定在c01执行test.sh
+
+bsub -Ip vim testfile.txt  #分配一个节点用以打开vim
+</code></pre>
 <p>常用参数：</p>
 <ul>
 <li>
@@ -132,37 +126,35 @@
 <li>
 <p><code>-m &lt;节点名&gt;</code>  提交到指定节点（可选）</p>
 <p>如不指定将随机选择合适的节点。</p>
-<p><strong><strong>注意：</strong></strong></p>
-<p>在LSF混合集群中（例如linux+windows的混合集群），如不使用<code>-m</code>指定节点，作业无法提交到与当前（执行提交命令的主机）操作系统不同的节点上。</p>
-<p>例如，在linux节点上提交任务<code>bsub -n sleep 233</code>，该作业不会被分配到一个操作系统为windows的计算节点上。假如c11节点的系统为windows，可以使用<code>bsub -m c11 &lt;cmd&gt;</code>指定当次作业在c11节点运行。</p>
+<p><strong>注意：</strong></p>
+<p>​	在LSF混合集群中（例如linux+windows的混合集群），如不使用<code>-m</code>指定节点，作业无法提交到与当前（执行提交命令的主机）操作系统不同的节点上。</p>
+<p>​	例如，在linux节点上提交任务<code>bsub -n sleep 233</code>，该作业不会被分配到一个操作系统为windows的计算节点上。假如c11节点的系统为windows，可以使用<code>bsub -m c11 &lt;cmd&gt;</code>指定当次作业在c11节点运行。</p>
 </li>
 <li>
 <p><code>-n &lt;线程数&gt;</code>  指定使用的线程数（可选）</p>
 <p>如不指定默认为1。</p>
-<p>提示：该处<code>-n</code>指定的线程数是任务调度系统<strong><strong>分配给该作业的最大可用线程资源</strong></strong>，与该作业执行的程序是否多线程并行执行无必然联系，程序并行执行需要其自身进行并行调用操作。</p>
-<p>```shell</p>
-<p>#分配了8线程资源 mpirun不带参数默认使用所有线程资源运行vasp_std</p>
-<p>bsub -n 8 mpirun vasp_std  #等同于#bsub -n 8 mpirun -n 8 vasp_std</p>
-<p>#虽然分配了8线程供其使用，但vasp_std是单线程执行 未调用mpi</p>
-<p>bsub -n 8 vasp_std</p>
-<p>```</p>
+<p>提示：该处<code>-n</code>指定的线程数是任务调度系统<strong>分配给该作业的最大可用线程资源</strong>，与该作业执行的程序是否多线程并行执行无必然联系，程序并行执行需要其自身进行并行调用操作。</p>
+<pre><code class="language-shell">#分配了8线程资源 mpirun不带参数默认使用所有线程资源运行vasp_std
+bsub -n 8 mpirun vasp_std  #等同于#bsub -n 8 mpirun -n 8 vasp_std
+#虽然分配了8线程供其使用，但vasp_std是单线程执行 未调用mpi
+bsub -n 8 vasp_std
+</code></pre>
 <p>使用了-n指定后，<code>mpirun</code> 就无需再指定其自身的<code>-n</code>参数。不建议使用以下方式调度，其会造成实际使用资源与调度器统计的资源发生出入：</p>
-<p>```shell</p>
-<p>#为其分配了8线程资源 但mpirun指定只用4线程并行</p>
-<p>bsub -n 8 mpirun -n 4 vasp_std</p>
-<p>#只为其分配了8线程资源 mpirun要求超出了调度器分配的资源范围</p>
-<p>bsub -n 8 mpirun -n 16 vasp_std</p>
-<p>```</p>
+<pre><code class="language-shell">#为其分配了8线程资源 但mpirun指定只用4线程并行
+bsub -n 8 mpirun -n 4 vasp_std
+#只为其分配了8线程资源 mpirun要求超出了调度器分配的资源范围 
+bsub -n 8 mpirun -n 16 vasp_std
+</code></pre>
 </li>
 <li>
-<p><code>-o &lt;标准输出文件&gt;</code>  指定作业执行中的<strong><strong>标准输出</strong></strong>（stdout）信息文件（可选）</p>
+<p><code>-o &lt;标准输出文件&gt;</code>  指定作业执行中的<strong>标准输出</strong>（stdout）信息文件（可选）</p>
 <p>如不指定，无标准输出文件。</p>
 <p>作业执行中的相关输出信息会写入该文件中，文件名字中可使用<code>%J</code>表示作业的编号（如<code>%J.txt</code>）。</p>
 </li>
 <li>
-<p><code>-e &lt;标准错误输出文件&gt;</code>  指定作业执行中的<strong><strong>标准错误输出</strong></strong>（stderr）信息文件（可选）</p>
+<p><code>-e &lt;标准错误输出文件&gt;</code>  指定作业执行中的<strong>标准错误输出</strong>（stderr）信息文件（可选）</p>
 <p>如不指定，无标准错误输出文件。</p>
-<p>作业执行中的相关<strong><strong>错误输出</strong></strong>信息会写入该文件中，文件名字中可使用<code>%J</code>表示作业的编号。</p>
+<p>作业执行中的相关<strong>错误输出</strong>信息会写入该文件中，文件名字中可使用<code>%J</code>表示作业的编号。</p>
 </li>
 <li>
 <p><code>-J &lt;作业名&gt;</code>  指定作业名（可选）</p>
@@ -178,22 +170,24 @@
 <p><code>-W [hours:]minutes[/host_name | /host_model]</code>  限制作业运行时间（超时会被bkill）。</p>
 </li>
 </ul>
-<p>## <strong>查询作业</strong></p>
-<p>### <strong>bjobs和bhist查看作业记录</strong></p>
-<p>```shell</p>
-<p>bjobs  #列出所有未完成作业</p>
-<p>bjobs -r  #查看正在运行的作业</p>
-<p>bjobs -p  #查看排队等待的作业</p>
-<p>bjobs -d  #查看已经完成的作业</p>
-<p>bjobs -u <username>  #查看某个用户的作业信息</p>
-<p>bjobs -u all  #查看所有用户的作业</p>
-<p>#加上作业编号可以查看某个具体的作业</p>
-<p>bjobs 135  #查看135号作业（即使该作业已经完成也可以查看）</p>
-<p>bjobs -l 135  #查看135号作业详情 （作业完成5分钟以后只能用bhist查看）</p>
-<p>bjobs -p 135  #查看处于排队状态的135号作业（可了解其排队原因）</p>
-<p>bhist　#查看作业历史</p>
-<p>bhist -a #查看所有历史提交的作业（包括未完成）</p>
-<p>```</p>
+<h2 id="查询作业">查询作业</h2>
+<h3 id="bjobs和bhist查看作业记录">bjobs和bhist查看作业记录</h3>
+<pre><code class="language-shell">bjobs  #列出所有未完成作业
+bjobs -r  #查看正在运行的作业
+bjobs -p  #查看排队等待的作业
+bjobs -d  #查看已经完成的作业
+
+bjobs -u &lt;username&gt;  #查看某个用户的作业信息
+bjobs -u all  #查看所有用户的作业
+
+#加上作业编号可以查看某个具体的作业
+bjobs 135  #查看135号作业（即使该作业已经完成也可以查看）
+bjobs -l 135  #查看135号作业详情 （作业完成5分钟以后只能用bhist查看）
+bjobs -p 135  #查看处于排队状态的135号作业（可了解其排队原因）
+
+bhist　#查看作业历史
+bhist -a #查看所有历史提交的作业（包括未完成）
+</code></pre>
 <p>bjobs/bhist常用参数</p>
 <p>这些参数后如不指定作业编号，将列出所有符合条件的所有作业的信息。</p>
 <ul>
@@ -214,109 +208,89 @@
 <p><code>-u</code>  查看某个用户的作业（如果值为<code>all</code>即查看所有用户的作业）</p>
 </li>
 </ul>
-<p>### <strong>bpeek查看运行中作业的输出</strong></p>
+<h3 id="bpeek查看运行中作业的输出">bpeek查看运行中作业的输出</h3>
 <p>查看运行中作业的标准输出（stdout）和标准错误输出（stderr）。`</p>
-<p>```shell</p>
-<p>#bpeek查看正在运行的作业的输出信息</p>
-<p>bpeek  #查看最近一个提交作业的输出信息</p>
-<p>bpeek 135  #查看135号作业输出信息</p>
-<p>```</p>
-<p>### <strong>作业状态</strong></p>
+<pre><code class="language-shell">#bpeek查看正在运行的作业的输出信息
+bpeek  #查看最近一个提交作业的输出信息
+bpeek 135  #查看135号作业输出信息
+</code></pre>
+<h3 id="作业状态">作业状态</h3>
 <p><code>bjobs</code>展示的状态信息中，STAT一栏为作业状态：</p>
 <ul>
-<li>
-<p>DONE  已完成</p>
-</li>
-<li>
-<p>RUN     运行中</p>
-</li>
-<li>
-<p>PEND   排队等候调度</p>
-</li>
-<li>
-<p>PSUSP  作业在排队中被挂起</p>
-</li>
-<li>
-<p>USUSP  作业在计算中被挂起</p>
-</li>
-<li>
-<p>SSUSP  作业被调度系统挂起</p>
+<li>DONE  已完成</li>
+<li>RUN     运行中</li>
+<li>PEND   排队等候调度
+<ul>
+<li>PSUSP  作业在排队中被挂起</li>
+<li>USUSP  作业在计算中被挂起</li>
+<li>SSUSP  作业被调度系统挂起</li>
+</ul>
 </li>
 </ul>
 <p>一个作业需要满足以下条件才能执行：</p>
 <ul>
-<li>
-<p>到达用户指定的时间（如果用户指定了开始时间）</p>
-</li>
-<li>
-<p>合格的主机负载</p>
-</li>
-<li>
-<p>队列中有符合执行条件的主机</p>
-</li>
+<li>到达用户指定的时间（如果用户指定了开始时间）</li>
+<li>合格的主机负载</li>
+<li>队列中有符合执行条件的主机</li>
 </ul>
-<p>### <strong>常见排队原因</strong></p>
+<h3 id="常见排队原因">常见排队原因</h3>
 <ul>
 <li>
 <blockquote>
 <p>User has reached the pre-user job slot limit of the queue</p>
 </blockquote>
-<p>用户作业达到了排队中作业所在队列的<strong><strong>个人作业进程数上限。</strong></strong></p>
+<p>用户作业达到了排队中作业所在队列的<strong>个人作业进程数上限。</strong></p>
 <p>此队列中用户正在运行的作业有计算结束，才会再分配后续的排队作业。</p>
 </li>
 <li>
 <blockquote>
 <p>The slot limit reached; 4hosts</p>
 </blockquote>
-<p>排队中作业达到了所在队列<strong><strong>可使用节点数的上限。</strong></strong></p>
+<p>排队中作业达到了所在队列<strong>可使用节点数的上限。</strong></p>
 <p>此队列中所有用户正在运行的作业有计算结束，才会再分配此队列中排在最前边的作业。</p>
 </li>
 <li>
 <blockquote>
 <p>The user has reached his job slot limit</p>
 </blockquote>
-<p>用于已运行的<strong><strong>作业数达到了系统规定的上限</strong></strong>。</p>
+<p>用于已运行的<strong>作业数达到了系统规定的上限</strong>。</p>
 <p>需已运行的作业有新的计算结束，排队中的作业才会进入系统调度。</p>
 </li>
 <li>
 <blockquote>
 <p>The queue has reached its job slot limit</p>
 </blockquote>
-<p>队列中已经运行的所有作业达到了系统上<strong><strong>队列总作业进程数的上限</strong></strong>。</p>
+<p>队列中已经运行的所有作业达到了系统上<strong>队列总作业进程数的上限</strong>。</p>
 <p>需该队列中已运行的作业有新的计算结束，才会调度该队列中排在第一位的作业。</p>
 </li>
 </ul>
-<p>## <strong>调整未完成作业</strong></p>
-<p>### <strong>更改作业提交参数bmod</strong></p>
+<h2 id="调整未完成作业">调整未完成作业</h2>
+<h3 id="更改作业提交参数bmod">更改作业提交参数bmod</h3>
 <p>只能在作业尚处于排队中时，已经运行的作业无法再更改提交或计算参数。</p>
-<p>```shell</p>
-<p>bmod -q high 123  #将123号作业编进名为high的队列中</p>
-<p>bmod -J new_name 123  #给123号作业重新起名为new_name</p>
-<p>```</p>
-<p>### <strong>更改作业执行顺序btop/bbot</strong></p>
-<p><strong><strong>只能修改正在排列的作业</strong></strong>，对已经开始运行的作业无效。</p>
-<p>```shell</p>
-<p>btop 123  #将123号作业移动到排队的顶部</p>
-<p>bbot 123  #将123号作业移动到排队的底部</p>
-<p>```</p>
-<p>### <strong>挂起未完成作业bstop</strong></p>
-<p>```shell</p>
-<p>bstop  &lt;作业编号&gt;</p>
-<p>bstop 1234  #删除1234号任务</p>
-<p>```</p>
-<p>### <strong>恢复挂起的作业bresume</strong></p>
-<p>```shell</p>
-<p>bresume  &lt;作业编号&gt;</p>
-<p>bresume 1234  #删除1234号任务</p>
-<p>```</p>
-<p>### <strong>删除作业bkill</strong></p>
-<p>```shell</p>
-<p>bkill  &lt;作业编号&gt;</p>
-<p>bkill 0 #删除所有作业</p>
-<p>bkill 1234  #删除1234号任务</p>
-<p>```</p>
-<p># <strong>排错</strong></p>
-<p>## <strong>作业工作目录被设置为<code>/tmp</code></strong></p>
+<pre><code class="language-shell">bmod -q high 123  #将123号作业编进名为high的队列中
+bmod -J new_name 123  #给123号作业重新起名为new_name
+</code></pre>
+<h3 id="更改作业执行顺序btopbbot">更改作业执行顺序btop/bbot</h3>
+<p><strong>只能修改正在排列的作业</strong>，对已经开始运行的作业无效。</p>
+<pre><code class="language-shell">btop 123  #将123号作业移动到排队的顶部
+bbot 123  #将123号作业移动到排队的底部
+</code></pre>
+<h3 id="挂起未完成作业bstop">挂起未完成作业bstop</h3>
+<pre><code class="language-shell">bstop  &lt;作业编号&gt;
+bstop 1234  #删除1234号任务
+</code></pre>
+<h3 id="恢复挂起的作业bresume">恢复挂起的作业bresume</h3>
+<pre><code class="language-shell">bresume  &lt;作业编号&gt;
+bresume 1234  #删除1234号任务
+</code></pre>
+<h3 id="删除作业bkill">删除作业bkill</h3>
+<pre><code class="language-shell">bkill  &lt;作业编号&gt;
+bkill 0 #删除所有作业
+bkill 1234  #删除1234号任务
+</code></pre>
+<h1 id="排错">排错</h1>
+<h2 id="作业工作目录被设置为tmp">作业工作目录被设置为<code>/tmp</code></h2>
+<p>http://www-01.ibm.com/support/docview.wss?uid=isg3T1014883</p>
 <p>linux下，调度器由于未找到相关的环境变量设定以下变量的值，于是将这些变量的值设置为<code>/tmp</code>：</p>
 <ul>
 <li>
@@ -329,11 +303,12 @@
 </li>
 </ul>
 <p>windows下(lsf)，<code>LS_SUBCWD</code>会被设置到用户目录下的<code>AppData\Local\Temp</code>，<code>LS_EXECCWD</code>会被设置到LSF安装目录下的<code>tmp</code>。</p>
-<p>&gt; LS_EXECCWD: Sets the current working directory for job execution.</p>
-<p>&gt;</p>
-<p>&gt; LS_SUBCWD: This is the directory on the submission when the job was submitted. This is different</p>
-<p>&gt; from PWD only if the directory is not shared across machines or when the execution account is</p>
-<p>&gt; different from the submission account as a result of account mapping.</p>
+<blockquote>
+<p>LS_EXECCWD: Sets the current working directory for job execution.</p>
+<p>LS_SUBCWD: This is the directory on the submission when the job was submitted. This is different<br>
+from PWD only if the directory is not shared across machines or when the execution account is<br>
+different from the submission account as a result of account mapping.</p>
+</blockquote>
 <p>可以在提交前设置该环境变量的值，以确保工作目录正确。</p>
 ]]></content>
     </entry>
