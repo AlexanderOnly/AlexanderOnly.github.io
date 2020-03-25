@@ -8,7 +8,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>LSF 作业管理系统 | 浮生一阙</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1585103844753">
+<link rel="shortcut icon" href="/favicon.ico?v=1585103996659">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
 
@@ -507,13 +507,16 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>2712<span class="pc-show">字数</span></span>
+      <span>2758<span class="pc-show">字数</span></span>
     </span>
     
   </div>
 </header>
               <div class="post-body next-md-body" id="post_body">
-                <h1 id="简介">简介</h1>
+                <blockquote>
+<p>最近遇到了 HPC 任务提交的问题，最后发现是用户节点任务数达到上限了。记录一下 LSF 系统的常用命令以备待查。</p>
+</blockquote>
+<h1 id="简介">简介</h1>
 <p>LSF和openlava</p>
 <blockquote>
 <p>IBM Spectrum LSF是一款分布式集群管理系统软件，负责计算资源的管理和批处理作业的调度。</p>
@@ -521,6 +524,7 @@ window.addEventListener('load', function() {
 <blockquote>
 <p>openlava兼容IBM Spectrum LSF的工作负载调度器，支持各种高性能计算和分析应用。</p>
 </blockquote>
+<!-- more -->
 <h1 id="程序管理">程序管理</h1>
 <p>以下命令可能需要root（或sudo）用户才能执行。</p>
 <pre><code class="language-shell">lsid  #查看集群说明信息
