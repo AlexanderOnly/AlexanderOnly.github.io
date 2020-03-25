@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://alexanderonly.github.io</id>
     <title>浮生一阙</title>
-    <updated>2020-03-25T02:34:28.760Z</updated>
+    <updated>2020-03-25T02:37:28.451Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://alexanderonly.github.io"/>
     <link rel="self" href="https://alexanderonly.github.io/atom.xml"/>
@@ -33,41 +33,30 @@ openlava stop  #停止
 openlava status  #状态
 </code></pre>
 <h1 id="获取信息">获取信息</h1>
-<ul>
-<li>host：主机（集群中的一个节点，一般是指一台单独的设备）</li>
-<li>queue：队列（同一类型的作业的集合，默认按作业提交的先后顺序排序执行，类似显示中的排队）</li>
-</ul>
+<p>host：主机（集群中的一个节点，一般是指一台单独的设备）<br>
+queue：队列（同一类型的作业的集合，默认按作业提交的先后顺序排序执行，类似显示中的排队）</p>
 <h2 id="节点状态bhosts">节点状态bhosts</h2>
 <ul>
 <li>
 <p>节点信息</p>
 <pre><code class="language-shell">lshosts  #各节点的系统信息（cpu内存等）
-
 bhosts  #各节点状态
 bhosts -l  &lt;主机名&gt;  #展示指定主机的信息
-
 lsload  #各节点的负载信息
 </code></pre>
 <p><code>bhost</code>的STATUS栏展示节点状态：</p>
-<ul>
-<li>
-<p>ok  可用——可接受新的作业的正常状态</p>
-</li>
-<li>
-<p>unavail  不可用</p>
-<p>可能原因：主机关闭；LIM和sbatchd不可达。</p>
-</li>
-<li>
-<p>unreach  无法连接</p>
-<p>可能原因：LIM在运行，但是sbatchd不可达。</p>
-</li>
-<li>
-<p>close  关闭——不接受新的作业</p>
-<p>可能原因：该节点的最大作业数被设置为0；该节点被临时关闭；该节点正在运行的作业数量以达到上限。</p>
-<p>使用<code>bhosts -l 主机名</code>可查看具体原因。</p>
 </li>
 </ul>
-</li>
+<p>ok  可用——可接受新的作业的正常状态<br>
+unavail  不可用<br>
+可能原因：主机关闭；LIM和sbatchd不可达。<br>
+unreach  无法连接<br>
+可能原因：LIM在运行，但是sbatchd不可达。<br>
+close  关闭——不接受新的作业<br>
+可能原因：该节点的最大作业数被设置为0；该节点被临时关闭；该节点正在运行的作业数量以达到上限。</p>
+<pre><code>使用`bhosts -l 主机名`可查看具体原因。
+</code></pre>
+<ul>
 <li>
 <p>开关节点</p>
 <pre><code class="language-shell">badmin hopen  &lt;主机名&gt;
